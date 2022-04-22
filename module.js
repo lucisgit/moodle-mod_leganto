@@ -37,7 +37,7 @@ M.mod_leganto.initList = function(Y, cmid, url, expanded) {
         Y.Transition.fx.slideFadeOut = {
             opacity: 0,
             top: '-100px',
-            left: '-600px',
+            left: '0px',
             duration: 0.2,
             easing: 'ease-out',
             on: {start: setRelativePosition}
@@ -63,52 +63,49 @@ M.mod_leganto.initList = function(Y, cmid, url, expanded) {
         }
 
         Y.delegate('click', function(e) {
-            if (e.currentTarget.ancestor('div').hasClass('activityinstance')) {
-                var linkhref = e.currentTarget.get('href'),
-                    list = Y.one(listid),
+            if (e.currentTarget.getAttribute('href') === url) {
+                var list = Y.one(listid),
                     arrow = Y.one(arrowid);
 
                 // Add a JavaScript loading icon.
-                var spinner = M.util.add_spinner(Y, e.currentTarget.ancestor('div'));
+                var spinner = M.util.add_spinner(Y, arrow);
                 spinner.removeClass('iconsmall');
                 spinner.setStyle('position', 'static');
 
-                if (linkhref === url) {
-                    // Display the JS loading icon.
-                    spinner.show();
+                // Display the JS loading icon.
+                spinner.show();
 
-                    if (arrow.hasClass('collapsed')) {
-                        // Send AJAX request for view.php (to trigger log/completion events).
-                        var httpRequest = new XMLHttpRequest();
+                if (arrow.hasClass('collapsed')) {
+                    // Send AJAX request for view.php (to trigger log/completion events).
+                    var httpRequest = new XMLHttpRequest();
 
-                        // Parse the response and check for errors.
-                        httpRequest.onreadystatechange = function() {
-                            if (httpRequest.readyState === 4) {
-                                var data = Y.JSON.parse(httpRequest.responseText);
-                                if (data.hasOwnProperty('error')) {
-                                    // Alert user if an error has occurred.
-                                    require(['core/notification'], function(notification) {
-                                        notification.alert('', data.error);
-                                    });
-                                    window.location.href = url;
-                                } else {
-                                    // If all is well, expand the list.
-                                    list.show('slideFadeIn');
-                                    arrow.removeClass('collapsed');
-                                    // Hide the JS loading icon.
-                                    spinner.hide();
-                                }
+                    // Parse the response and check for errors.
+                    httpRequest.onreadystatechange = function() {
+                        if (httpRequest.readyState === 4) {
+                            var data = Y.JSON.parse(httpRequest.responseText);
+                            if (data.hasOwnProperty('error')) {
+                                // Alert user if an error has occurred.
+                                require(['core/notification'], function(notification) {
+                                    notification.alert('', data.error);
+                                });
+                                window.location.href = url;
+                            } else {
+                                // If all is well, expand the list.
+                                list.show('slideFadeIn');
+                                arrow.removeClass('collapsed');
+                                // Hide the JS loading icon.
+                                spinner.hide();
                             }
-                        };
-                        httpRequest.open('GET', url);
-                        httpRequest.setRequestHeader('X-Requested-With', 'xmlhttprequest');
-                        httpRequest.send();
-                    } else {
-                        list.hide('slideFadeOut');
-                        arrow.addClass('collapsed');
-                        // Hide the JS loading icon.
-                        spinner.hide();
-                    }
+                        }
+                    };
+                    httpRequest.open('GET', url);
+                    httpRequest.setRequestHeader('X-Requested-With', 'xmlhttprequest');
+                    httpRequest.send();
+                } else {
+                    list.hide('slideFadeOut');
+                    arrow.addClass('collapsed');
+                    // Hide the JS loading icon.
+                    spinner.hide();
                 }
             }
 
