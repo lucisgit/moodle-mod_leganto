@@ -25,8 +25,6 @@
 
 namespace mod_leganto\privacy;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Privacy API implementation for the Leganto resource lists plugin.
  *

@@ -23,8 +23,6 @@
  * @author     Tony Butler <a.butler4@lancaster.ac.uk>
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 /** Display leganto contents on a separate page. */
 define('LEGANTO_DISPLAY_PAGE', 0);
 /** Display leganto contents inline in a course. */

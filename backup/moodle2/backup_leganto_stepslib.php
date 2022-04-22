@@ -24,8 +24,6 @@
  * @author     Tony Butler <a.butler4@lancaster.ac.uk>
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Define the complete leganto structure for backup, with file and id annotations.
  *

@@ -25,8 +25,6 @@
 
 namespace mod_leganto\event;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * The mod_leganto course module viewed event class.
  *

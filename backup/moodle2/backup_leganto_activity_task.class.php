@@ -59,7 +59,7 @@ class backup_leganto_activity_task extends backup_activity_task {
      * @param string $content Some HTML text that eventually contains URLs to the activity instance scripts.
      * @return string The content with the URLs encoded.
      */
-    static public function encode_content_links($content) {
+    public static function encode_content_links($content) {
         global $CFG;
 
         $base = preg_quote($CFG->wwwroot, '/');
