@@ -772,8 +772,8 @@ class leganto {
             } else {
                 $title = !empty($citation->metadata->title) ? $citation->metadata->title : $citation->metadata->article_title;
             }
-            $headinglevel = !is_null($display) && $display == LEGANTO_DISPLAY_PAGE ? 4 : 5;
-            $citation->title = $OUTPUT->heading($title, $headinglevel, 'citationtitle');
+            $headinglevel = !is_null($display) && $display == LEGANTO_DISPLAY_PAGE ? 3 : 5;
+            $citation->title = $OUTPUT->heading($title, $headinglevel, 'citationtitle h' . ($headinglevel + 1));
             if (!empty($citation->leganto_permalink)) {
                 $permalink = str_replace('auth=local', 'auth=SAML', $citation->leganto_permalink);
                 $linkaction = new popup_action('click', $permalink, 'popup', array('width' => 1024, 'height' => 768));
@@ -1028,8 +1028,8 @@ class leganto {
         }
 
         $headingstr = get_string('sectionheading', 'leganto', array('name' => $section->name, 'count' => $countspan));
-        $headinglevel = !is_null($display) && $display == LEGANTO_DISPLAY_PAGE ? 3 : 4;
-        $heading = $OUTPUT->heading($headingstr, $headinglevel, 'sectionheading');
+        $headinglevel = !is_null($display) && $display == LEGANTO_DISPLAY_PAGE ? 2 : 4;
+        $heading = $OUTPUT->heading($headingstr, $headinglevel, 'sectionheading h' . ($headinglevel + 1));
         $description = !empty($section->description) ? $section->description : '';
         $html = $heading . $description;
 

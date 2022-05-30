@@ -53,24 +53,18 @@ class mod_leganto_renderer extends plugin_renderer_base {
             return $output;
         }
 
-        if (trim($leganto->intro)) {
-            if ($leganto->display == LEGANTO_DISPLAY_PAGE) {
-                $output .= $this->output->box(format_module_intro('leganto', $leganto, $cm->id),
-                        'generalbox', 'intro');
-            } else if ($cm->showdescription) {
-                // For 'display inline' do not filter, filters run at display time.
-                $output .= format_module_intro('leganto', $leganto, $cm->id, false);
-            }
-        }
-
         $legantolist = new leganto_list($leganto, $cm);
         if ($leganto->display != LEGANTO_DISPLAY_PAGE) {
+            if ($cm->showdescription && trim($leganto->intro)) {
+                $output .= format_module_intro('leganto', $leganto, $cm->id, false);
+                $desc = true;
+            }
             $viewlink = (string) $cm->url;
             $expanded = $leganto->display == LEGANTO_DISPLAY_INLINE_EXPANDED;
             $listid = $cm->modname . '-' . $cm->id;
 
             // YUI function to hide inline reading list until user clicks 'view' link.
-            $this->page->requires->js_init_call('M.mod_leganto.initList', array($cm->id, $viewlink, $expanded));
+            $this->page->requires->js_init_call('M.mod_leganto.initList', array($cm->id, $viewlink, $expanded, !empty($desc)));
             $output .= $this->output->box($this->render($legantolist), 'generalbox legantobox', $listid);
         } else {
             $output .= $this->output->box($this->render($legantolist), 'generalbox', 'leganto');

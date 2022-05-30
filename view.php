@@ -93,12 +93,11 @@ $PAGE->set_title($course->shortname . ': ' . $leganto->name);
 $PAGE->set_heading($course->fullname);
 $PAGE->set_activity_record($leganto);
 
+$PAGE->add_body_class('limitedwidth');
 
 $output = $PAGE->get_renderer('mod_leganto');
 
 echo $output->header();
-
-echo $output->heading(format_string($leganto->name), 2);
 
 echo $output->display_leganto($leganto);
 

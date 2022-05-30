@@ -23,10 +23,6 @@
  * @author     Tony Butler <a.butler4@lancaster.ac.uk>
  */
 
-#page-mod-leganto-mod .mform fieldset[id^="id_list-"] h4:first-child {
-    margin-top: 0;
-}
-
 #page-mod-leganto-mod .mform fieldset[id^="id_list-"] .fitem {
     margin-top: 10px;
 }
@@ -68,14 +64,17 @@
     color: #555;
 }
 
+#page-mod-leganto-view div#leganto,
 div.legantobox {
     border: none;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
 }
 
 #page-mod-leganto-view div.listsection,
 div.legantobox div.listsection {
     text-shadow: 0 1px 0 #fff;
-    margin: 1em 0;
+    margin: 1em 0 0;
     padding: 0.5em 1em;
     border: 1px solid #e3e3e3;
     background-color: #f5f5f5;
@@ -110,7 +109,7 @@ div.legantobox ul.citations li.citation + li.citation {
     border-top: 1px solid #fff;
 }
 
-#page-mod-leganto-view ul.citations li.citation h4.citationtitle,
+#page-mod-leganto-view ul.citations li.citation h3.citationtitle,
 div.legantobox ul.citations li.citation h5.citationtitle {
     display: inline;
 }
@@ -209,10 +208,8 @@ div.legantobox ul.citations li.citation a.citationsource:active {
 
 .leganto .showhidearrow {
     background: url([[pix:core|t/expanded]]);
-    margin-left: 3px;
     width: 16px;
     height: 16px;
-    vertical-align: text-bottom;
     -webkit-transition: -webkit-transform 0.2s;
     transition: transform 0.2s;
 }

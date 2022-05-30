@@ -24,7 +24,7 @@
 
 M.mod_leganto = {};
 
-M.mod_leganto.initList = function(Y, cmid, url, expanded) {
+M.mod_leganto.initList = function(Y, cmid, url, expanded, desc) {
     Y.use('node', 'transition', function(Y) {
         /**
          * Set relative position style for a list node.
@@ -60,6 +60,14 @@ M.mod_leganto.initList = function(Y, cmid, url, expanded) {
             // Have to hide again without transition to get display: none.
             Y.one(listid).hide();
             Y.one(arrowid).addClass('collapsed');
+        }
+
+        // Move list node out of 'activity-altcontent' div and remove if no description.
+        var listNode = document.getElementById('leganto-' + cmid),
+            altNode = listNode.parentNode.parentNode;
+        altNode.parentNode.parentNode.appendChild(listNode);
+        if (desc === false) {
+            altNode.remove();
         }
 
         Y.delegate('click', function(e) {

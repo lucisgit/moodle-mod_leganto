@@ -39,6 +39,8 @@ function leganto_supports($feature) {
     switch($feature) {
         case FEATURE_MOD_ARCHETYPE:
             return MOD_ARCHETYPE_RESOURCE;
+        case FEATURE_MOD_PURPOSE:
+            return MOD_PURPOSE_CONTENT;
         case FEATURE_GROUPS:
             return false;
         case FEATURE_GROUPINGS:
@@ -262,7 +264,8 @@ function leganto_cm_info_view(cm_info $cm) {
             $leganto->introformat = FORMAT_MOODLE;
         }
         // Display leganto.
-        $renderer = $PAGE->get_renderer('mod_leganto');
-        $cm->set_content($renderer->display_leganto($leganto), true);
+        if ($renderer = $PAGE->get_renderer('mod_leganto')) {
+            $cm->set_content($renderer->display_leganto($leganto), true);
+        }
     }
 }
