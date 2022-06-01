@@ -182,8 +182,8 @@ function leganto_page_type_list($pagetype, $parentcontext, $currentcontext) {
  * information needed to print this activity in various places.
  *
  * If leganto needs to be displayed inline we store additional information
- * in customdata, so functions {@link leganto_cm_info_dynamic()} and
- * {@link leganto_cm_info_view()} do not need to do DB queries.
+ * in customdata, so functions {@see leganto_cm_info_dynamic()} and
+ * {@see leganto_cm_info_view()} do not need to do DB queries.
  *
  * @param cm_info $cm
  * @return cached_cm_info Cached course module info.

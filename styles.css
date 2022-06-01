@@ -31,7 +31,6 @@
     color: #555;
     text-decoration: none;
     text-shadow: 0 1px 0 #fff;
-    background-color: #ededed;
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf));
     display: inline-block;
     padding: 3px 9px;
@@ -46,7 +45,6 @@
 
 #page-mod-leganto-mod .mform fieldset[id^="id_list-"] .fitem .felement[data-fieldtype="submit"] a:hover,
 #page-mod-leganto-mod .mform fieldset[id^="id_list-"] .fitem .felement[data-fieldtype="submit"] a:active {
-    background-color: #dfdfdf;
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed));
 }
 
@@ -62,13 +60,6 @@
     font-size: 1.0em;
     font-weight: 600;
     color: #555;
-}
-
-#page-mod-leganto-view div#leganto,
-div.legantobox {
-    border: none;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
 }
 
 #page-mod-leganto-view div.listsection,
@@ -95,13 +86,13 @@ div.legantobox ul.citations {
 div.legantobox ul.citations li.citation {
     line-height: 1.5em;
     padding: 6px 0;
-    border-bottom: 1px solid #e3e3e3 !important;
-    list-style-type: none !important;
+    border-bottom: 1px solid #e3e3e3;
+    list-style-type: none;
 }
 
 #page-mod-leganto-view ul.citations li.citation:last-child,
 div.legantobox ul.citations li.citation:last-child {
-    border-bottom: none !important;
+    border-bottom: none;
 }
 
 #page-mod-leganto-view ul.citations li.citation + li.citation,

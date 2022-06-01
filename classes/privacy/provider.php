@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Defines {@link \mod_leganto\privacy\provider} class.
+ * Defines {@see \mod_leganto\privacy\provider} class.
  *
  * @package     mod_leganto
  * @category    privacy
