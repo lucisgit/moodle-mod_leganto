@@ -33,6 +33,11 @@ visibility).
 Changelog
 ---------
 
+2022-06-01  v4.0.0
+  * Fix JS selectors and make transitions less jarring
+  * Various fixes to improve support for Moodle 4.0
+  * Address issues identified by Moodle Plugin CI tests
+
 2020-10-27  v3.5.1
   * Tell set_content() that list content is already formatted
   * Reset cached list data when loading course module config
@@ -60,16 +65,17 @@ Installing from the Git repository (recommended if you installed Moodle from
 Git):
 
 Follow the instructions at
-http://docs.moodle.org/33/en/Git_for_Administrators#Installing_a_contributed_extension_from_its_Git_repository,
-e.g. for the Moodle 3.3.x code:
-$ cd /path/to/your/moodle/
-$ cd mod/
-$ git clone https://github.com/tonyjbutler/moodle-mod_leganto.git leganto
-$ cd leganto/
-$ git checkout -b MOODLE_33_STABLE origin/MOODLE_33_STABLE
-$ git branch -d master
-$ cd /path/to/your/moodle/
-$ echo /mod/leganto/ >> .git/info/exclude
+https://docs.moodle.org/400/en/Git_for_Administrators#Installing_a_contributed_extension_from_its_Git_repository,
+e.g. for the Moodle 4.0.x code:
+
+    $ cd /path/to/your/moodle/
+    $ cd mod/
+    $ git clone https://github.com/tonyjbutler/moodle-mod_leganto.git leganto
+    $ cd leganto/
+    $ git checkout -b MOODLE_400_STABLE origin/MOODLE_400_STABLE
+    $ git branch -d master
+    $ cd /path/to/your/moodle/
+    $ echo /mod/leganto/ >> .git/info/exclude
 
 
 Installing from a zip archive downloaded from
@@ -87,11 +93,12 @@ Updating Moodle
 ---------------
 If you installed Moodle and the Leganto reading list module from Git you can
 run the following commands to update both (see
-http://docs.moodle.org/33/en/Git_for_Administrators#Installing_a_contributed_extension_from_its_Git_repository):
-$ cd /path/to/your/moodle/
-$ git pull
-$ cd mod/leganto/
-$ git pull
+https://docs.moodle.org/400/en/Git_for_Administrators#Installing_a_contributed_extension_from_its_Git_repository):
+
+    $ cd /path/to/your/moodle/
+    $ git pull
+    $ cd mod/leganto/
+    $ git pull
 
 If you installed from a zip archive you will need to repeat the installation
 procedure using the appropriate zip file downloaded from

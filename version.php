@@ -25,9 +25,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2020102700;        // The current module version (Date: YYYYMMDDXX).
-$plugin->requires  = 2018051700;        // Requires this Moodle version.
+$plugin->version   = 2022060100;        // The current module version (Date: YYYYMMDDXX).
+$plugin->requires  = 2022041900;        // Requires this Moodle version.
 $plugin->component = 'mod_leganto';     // Full name of the plugin (used for diagnostics).
 $plugin->cron      = 0;
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = 'v3.5.1 (Build: 20201027)';
+$plugin->release   = 'v4.0.0 (Build: 20220601)';
