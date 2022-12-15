@@ -211,6 +211,11 @@ div.legantobox ul.citations li.citation a.citationsource:active {
     transform: rotate(-90deg);
 }
 
+.section .activity.leganto .afterlink {
+    margin-top: 25px;
+    margin-left: 5px;
+}
+
 .section .activity.leganto .contentafterlink {
     margin-top: 0;
 }

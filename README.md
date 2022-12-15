@@ -13,9 +13,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-copyright 2017 Lancaster University (http://www.lancaster.ac.uk/)
-license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
-author    Tony Butler <a.butler4@lancaster.ac.uk>
+    copyright   2017 Lancaster University (http://www.lancaster.ac.uk/)
+    license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+    author      Tony Butler <a.butler4@lancaster.ac.uk>
 
 
 Leganto reading list module for Moodle
@@ -34,27 +34,32 @@ Changelog
 ---------
 
 2022-06-01  v4.0.0
+
   * Fix JS selectors and make transitions less jarring
   * Various fixes to improve support for Moodle 4.0
   * Address issues identified by Moodle Plugin CI tests
 
 2020-10-27  v3.5.1
+
   * Tell set_content() that list content is already formatted
   * Reset cached list data when loading course module config
 
 2018-09-07  v3.5.0
+
   * Add option to display list content inline and auto-expanded
   * Redirect to the list rather than just the course section
   * Add null privacy provider for GDPR support
   * Add support for new chapter metadata attributes in API
 
 2018-01-30  v3.1.1, v3.3.1
+
   * Display chapter titles for citations of type 'Book Chapter'
   * Support course/list/section/citation ids of > 16 characters
   * Add option to include public notes in citation display
   * Expand list fieldset if it contains pre-selected citations
 
 2017-09-29  v3.1.0, v3.3.0
+
   * Initial stable release
 
 

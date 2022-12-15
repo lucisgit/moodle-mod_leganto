@@ -76,7 +76,7 @@ class mod_leganto_renderer extends plugin_renderer_base {
     /**
      * Render the HTML for the customised reading list.
      *
-     * @param \leganto_list $list The list renderable.
+     * @param leganto_list $list The list renderable.
      * @return string The HTML to render the list.
      */
     public function render_leganto_list(leganto_list $list) {
