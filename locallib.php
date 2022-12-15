@@ -479,7 +479,7 @@ class leganto {
             }
         }
 
-        if ($cached and $json = $cache->get($cachedid)) {
+        if ($cached && ($json = $cache->get($cachedid))) {
             return $json;
         }
 
@@ -651,7 +651,7 @@ class leganto {
             if (!empty($year)) {
                 $query .= '%20AND%20year~' . $year;
             }
-            if (!$courses = $this->call_api(ALMA_GET_COURSES, $query) or $courses->total_record_count == 0) {
+            if (!($courses = $this->call_api(ALMA_GET_COURSES, $query)) || $courses->total_record_count == 0) {
                 continue;
             }
 
@@ -903,7 +903,7 @@ class leganto {
      * @return string The final HTML output to display the custom reading list.
      */
     public function get_list_html($citations, $display) {
-        if (empty($citations) or !$tree = json_decode($citations)) {
+        if (empty($citations) || !($tree = json_decode($citations))) {
             return '';
         }
 
