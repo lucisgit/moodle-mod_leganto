@@ -60,14 +60,14 @@ class mod_leganto_mod_form extends moodleform_mod {
             if (!$ctx) {
                 $ctx = context_course::instance($this->current->course);
             }
-            $course = $DB->get_record('course', array('id' => $this->current->course), '*', MUST_EXIST);
+            $course = $DB->get_record('course', ['id' => $this->current->course], '*', MUST_EXIST);
             $this->leganto->set_course($course);
         }
 
         // General section.
         $mform->addElement('header', 'general', get_string('general', 'form'));
 
-        $mform->addElement('text', 'name', get_string('listname', 'leganto'), array('size' => '64'));
+        $mform->addElement('text', 'name', get_string('listname', 'leganto'), ['size' => '64']);
         if (!empty($CFG->formatstringstriptags)) {
             $mform->setType('name', PARAM_TEXT);
         } else {
@@ -93,12 +93,12 @@ class mod_leganto_mod_form extends moodleform_mod {
         $mform->addElement('header', 'appearance', get_string('appearance'));
         $mform->setExpanded('appearance', true);
 
-        $mform->addElement('select', 'display', get_string('display', 'leganto'),
-                array(
-                    LEGANTO_DISPLAY_PAGE             => get_string('displaypage', 'leganto'),
-                    LEGANTO_DISPLAY_INLINE_COLLAPSED => get_string('displayinlinecollapsed', 'leganto'),
-                    LEGANTO_DISPLAY_INLINE_EXPANDED  => get_string('displayinlineexpanded', 'leganto')
-                ));
+        $mform->addElement('select', 'display', get_string('display', 'leganto'), [
+                LEGANTO_DISPLAY_PAGE             => get_string('displaypage', 'leganto'),
+                LEGANTO_DISPLAY_INLINE_COLLAPSED => get_string('displayinlinecollapsed', 'leganto'),
+                LEGANTO_DISPLAY_INLINE_EXPANDED  => get_string('displayinlineexpanded', 'leganto'),
+            ]
+        );
         $mform->addHelpButton('display', 'display', 'leganto');
         $mform->setDefault('display', $adminconfig->defaultdisplay);
 
@@ -186,7 +186,7 @@ class mod_leganto_mod_form extends moodleform_mod {
         if (!empty($adminconfig->authorsinconfig) && !empty($citation->author)) {
             $label .= html_writer::empty_tag('br') . $citation->author;
         }
-        $mform->addElement('advcheckbox', $citation->path, null, $label, array('group' => $checkboxgrp - 1));
+        $mform->addElement('advcheckbox', $citation->path, null, $label, ['group' => $checkboxgrp - 1]);
         $mform->setDefault($citation->path, $default);
 
         return !empty($default);

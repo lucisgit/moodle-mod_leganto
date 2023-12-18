@@ -35,7 +35,7 @@ if ($ADMIN->fulltree) {
             get_string('requiremodintro_desc', 'leganto'), 0));
 
     // Display settings.
-    $optionsdd = array();
+    $optionsdd = [];
     $optionsdd[0] = get_string('displaypage', 'leganto');
     $optionsdd[1] = get_string('displayinlinecollapsed', 'leganto');
     $optionsdd[2] = get_string('displayinlineexpanded', 'leganto');
@@ -57,7 +57,7 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_heading('leganto/codesettings', get_string('codesettings', 'leganto'), ''));
 
     // Code source.
-    $optionscs = array();
+    $optionscs = [];
     $optionscs['idnumber'] = get_string('idnumbercourse');
     $optionscs['shortname'] = get_string('shortnamecourse');
     $optionscs['codetable'] = get_string('codetable', 'leganto');

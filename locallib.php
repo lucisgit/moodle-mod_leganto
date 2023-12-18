@@ -69,7 +69,7 @@ class leganto {
     private $returnaction = 'view';
 
     /** @var array Params to be used to return to this page. */
-    private $returnparams = array();
+    private $returnparams = [];
 
     /** @var string modulename Prevents excessive calls to get_string. */
     private static $modulename = null;
@@ -106,7 +106,7 @@ class leganto {
         $this->course = $course;
 
         // Temporary cache only lives for a single request - used to reduce db lookups.
-        $this->cache = array();
+        $this->cache = [];
     }
 
     /**
@@ -206,7 +206,7 @@ class leganto {
             return $this->instance;
         }
         if ($this->get_course_module()) {
-            $params = array('id' => $this->get_course_module()->instance);
+            $params = ['id' => $this->get_course_module()->instance];
             $this->instance = $DB->get_record('leganto', $params, '*', MUST_EXIST);
         }
         if (!$this->instance) {
@@ -278,7 +278,7 @@ class leganto {
         if (!$this->context) {
             return null;
         }
-        $params = array('id' => $this->get_course_context()->instanceid);
+        $params = ['id' => $this->get_course_context()->instanceid];
         $this->course = $DB->get_record('course', $params, '*', MUST_EXIST);
 
         return $this->course;
@@ -321,10 +321,10 @@ class leganto {
         $returnaction = optional_param('returnaction', '', PARAM_ALPHA);
         $returnparams = optional_param('returnparams', '', PARAM_TEXT);
 
-        $params = array();
+        $params = [];
         $returnparams = str_replace('&amp;', '&', $returnparams);
         parse_str($returnparams, $params);
-        $newparams = array('id' => $this->get_course_module()->id, 'action' => $returnaction);
+        $newparams = ['id' => $this->get_course_module()->id, 'action' => $returnaction];
         $params = array_merge($newparams, $params);
 
         $url = new moodle_url('/mod/leganto/view.php', $params);
@@ -347,7 +347,7 @@ class leganto {
         $this->adminconfig = get_config('leganto');
 
         // Clean up Alma API URL if necessary.
-        $search = array('http://', 'https://', get_string('apiurl_default', 'leganto'));
+        $search = ['http://', 'https://', get_string('apiurl_default', 'leganto')];
         $baseurl = trim(str_ireplace($search, '', $this->adminconfig->apiurl), '/');
         if (!empty($baseurl)) {
             $slashpos = strpos($baseurl, '/');
@@ -379,11 +379,11 @@ class leganto {
 
         $adminconfig = $this->get_admin_config();
 
-        $settings = array(
-                'apiurl',
-                'apikey'
-        );
-        $message = array();
+        $settings = [
+            'apiurl',
+            'apikey',
+        ];
+        $message = [];
 
         foreach ($settings as $setting) {
             if (empty($adminconfig->$setting)) {
@@ -412,15 +412,14 @@ class leganto {
      * @param bool $cached Whether to return cached data instead (if available).
      * @return stdClass|bool The decoded JSON response, or false.
      */
-    private function call_api($method, $q = '', $courseid = '', $listid = '', $citationid = '', $params = array(),
-                              $cached = false) {
+    private function call_api($method, $q = '', $courseid = '', $listid = '', $citationid = '', $params = [], $cached = false) {
         // Start by checking that the API is configured.
         if (!$this->is_api_configured()) {
             return false;
         }
 
         // Make sure we have all the required data.
-        $debugdata = array();
+        $debugdata = [];
         if ($method == ALMA_GET_COURSES) {
             if (empty($q)) {
                 $debugdata['method'] = 'Retrieve courses';
@@ -485,13 +484,13 @@ class leganto {
 
         // Prepare cURL request data.
         $curl = new curl;
-        $header = array(
+        $header = [
             'Accept: application/json',
-            'Authorization: apikey ' . $adminconfig->apikey
-        );
-        $options = array(
-            'CURLOPT_TIMEOUT' => 30
-        );
+            'Authorization: apikey ' . $adminconfig->apikey,
+        ];
+        $options = [
+            'CURLOPT_TIMEOUT' => 30,
+        ];
         $curl->setHeader($header);
         $curl->setopt($options);
         $url = new moodle_url($adminconfig->apiurl . $path);
@@ -550,8 +549,8 @@ class leganto {
             $coursecolumn = $adminconfig->coursecolumn;
             $courseattribute = $course->{$adminconfig->courseattribute};
 
-            $codes = array();
-            if ($records = $DB->get_records($codetable, array($coursecolumn => $courseattribute))) {
+            $codes = [];
+            if ($records = $DB->get_records($codetable, [$coursecolumn => $courseattribute])) {
                 foreach ($records as $record) {
                     $codes[] = $record->$codecolumn;
                 }
@@ -590,7 +589,7 @@ class leganto {
             preg_match_all($coderegex, $source, $codes, PREG_PATTERN_ORDER);
             $codes = (!empty($codes[1])) ? $codes[1] : $codes[0];
         } else {
-            $codes = array($source);
+            $codes = [$source];
         }
         $codes = array_unique($codes);
 
@@ -607,7 +606,7 @@ class leganto {
     private function get_child_courses($courseid) {
         global $DB;
 
-        $childcourses = array();
+        $childcourses = [];
         $select = "enrol = 'meta' AND status = 0 AND courseid = $courseid";
 
         if ($childcourseids = $DB->get_fieldset_select('enrol', 'customint1', $select)) {
@@ -643,7 +642,7 @@ class leganto {
             $cache = cache::make('mod_leganto', 'listdata');
         }
 
-        $lists = array();
+        $lists = [];
 
         foreach ($codes as $code) {
             // Build the course search query string for the Alma API request.
@@ -657,7 +656,7 @@ class leganto {
 
             foreach ($courses->course as $almacourse) {
                 $courseid = $almacourse->id;
-                if (!$coursedata = $this->call_api(ALMA_GET_COURSE, '', $courseid, '', '', array('view' => 'full'))) {
+                if (!$coursedata = $this->call_api(ALMA_GET_COURSE, '', $courseid, '', '', ['view' => 'full'])) {
                     continue;
                 }
 
@@ -693,7 +692,7 @@ class leganto {
      * @return stdClass|bool A JSON object containing the data, or false.
      */
     private function get_list_data($courseid, $listid, $cached = false) {
-        if (!$list = $this->call_api(ALMA_GET_LIST, '', $courseid, $listid, '', array('view' => 'full'), $cached)) {
+        if (!$list = $this->call_api(ALMA_GET_LIST, '', $courseid, $listid, '', ['view' => 'full'], $cached)) {
             return false;
         }
 
@@ -776,11 +775,11 @@ class leganto {
             $citation->title = $OUTPUT->heading($title, $headinglevel, 'citationtitle h' . ($headinglevel + 1));
             if (!empty($citation->leganto_permalink)) {
                 $permalink = str_replace('auth=local', 'auth=SAML', $citation->leganto_permalink);
-                $linkaction = new popup_action('click', $permalink, 'popup', array('width' => 1024, 'height' => 768));
+                $linkaction = new popup_action('click', $permalink, 'popup', ['width' => 1024, 'height' => 768]);
                 $linktitle = get_string('viewcitation', 'leganto');
                 $linkclass = !is_null($display) && $display == LEGANTO_DISPLAY_PAGE ? ' fa-lg' : '';
                 $citation->permalink = $OUTPUT->action_link($permalink, ' ', $linkaction,
-                        array('class' => 'fa fa-external-link citationlink' . $linkclass, 'title' => $linktitle));
+                        ['class' => 'fa fa-external-link citationlink' . $linkclass, 'title' => $linktitle]);
             }
 
             if (empty($citation->author) && !empty($citation->metadata->author)) {
@@ -808,7 +807,7 @@ class leganto {
             }
 
             if (!empty($citation->citation_tags->citation_tag)) {
-                $citation->tags = array();
+                $citation->tags = [];
                 foreach ($citation->citation_tags->citation_tag as $tag) {
                     if (!empty($tag->type->value) && $tag->type->value == 'PUBLIC' && !empty($tag->value->desc)) {
                         $citation->tags[] = html_writer::span($tag->value->desc, 'citationtag');
@@ -823,12 +822,12 @@ class leganto {
             if (!empty($citation->metadata->source)) {
                 $buttonhref = $citation->metadata->source;
                 $buttonlabel = get_string('viewonline', 'leganto');
-                $buttonaction = new popup_action('click', $buttonhref, 'popup', array('width' => 1024, 'height' => 768));
+                $buttonaction = new popup_action('click', $buttonhref, 'popup', ['width' => 1024, 'height' => 768]);
                 // The URL in the popup_action object is encoded, but needs to be un-encoded!
                 $buttonaction->jsfunctionargs['url'] = $buttonhref;
                 $buttontitle = $title;
                 $citation->source = $OUTPUT->action_link($buttonhref, $buttonlabel, $buttonaction,
-                        array('class' => 'citationsource', 'title' => $buttontitle));
+                        ['class' => 'citationsource', 'title' => $buttontitle]);
             }
 
             if (!empty($parentpath)) {
@@ -850,7 +849,7 @@ class leganto {
     public function get_citations($formdata) {
         $citationpathregex = '/^course-[0-9]{16,}_list-[0-9]{16,}_section-[0-9]{16,}_citation-[0-9]{16,}$/';
 
-        $selected = array();
+        $selected = [];
         foreach ($formdata as $name => $value) {
             if (preg_match($citationpathregex, $name) && $value == 1) {
                 $path = $this->explode_citation_path($name);
@@ -871,16 +870,16 @@ class leganto {
      */
     public function get_selected_citations() {
         if (!$this->has_instance()) {
-            return array();
+            return [];
         }
         if (!$config = $this->get_instance()->citations) {
-            return array();
+            return [];
         }
         if (!$tree = json_decode($config)) {
-            return array();
+            return [];
         }
 
-        $paths = array();
+        $paths = [];
         foreach ($tree as $coursekey => $coursetree) {
             foreach ($coursetree as $listkey => $listtree) {
                 foreach ($listtree as $sectionkey => $citations) {
@@ -932,10 +931,10 @@ class leganto {
         $parts = explode('_', $citationpath);
         $partscount = count($parts);
 
-        $path = array($parts[$partscount - 1]);
+        $path = [$parts[$partscount - 1]];
 
         for ($i = $partscount - 2; $i >= 0; $i--) {
-            $path = array($parts[$i] => $path);
+            $path = [$parts[$i] => $path];
         }
 
         return $path;
@@ -963,7 +962,7 @@ class leganto {
                 }
 
                 // Open a section container and output the heading details.
-                $html .= html_writer::start_div('listsection', array('id' => $sectionid));
+                $html .= html_writer::start_div('listsection', ['id' => $sectionid]);
                 $html .= $this->get_section_html($list, $sectionid, $display, count($element));
 
                 // Remember that this was a section heading.
@@ -981,7 +980,7 @@ class leganto {
                 $citationid = str_replace('citation-', '', $element);
                 if (!$wascitation) {
                     // If previous element was a section heading, open an unordered list.
-                    $html .= html_writer::start_tag('ul', array('class' => 'citations'));
+                    $html .= html_writer::start_tag('ul', ['class' => 'citations']);
                 }
 
                 // Output the citation details.
@@ -1027,7 +1026,7 @@ class leganto {
             $countspan = '';
         }
 
-        $headingstr = get_string('sectionheading', 'leganto', array('name' => $section->name, 'count' => $countspan));
+        $headingstr = get_string('sectionheading', 'leganto', ['name' => $section->name, 'count' => $countspan]);
         $headinglevel = !is_null($display) && $display == LEGANTO_DISPLAY_PAGE ? 2 : 4;
         $heading = $OUTPUT->heading($headingstr, $headinglevel, 'sectionheading h' . ($headinglevel + 1));
         $description = !empty($section->description) ? $section->description : '';
@@ -1049,7 +1048,7 @@ class leganto {
             return '';
         }
 
-        $html = html_writer::start_tag('li', array('id' => $citation->id, 'class' => 'citation'));
+        $html = html_writer::start_tag('li', ['id' => $citation->id, 'class' => 'citation']);
         if (!empty($citation->source)) {
             $html .= $citation->source;
         }

@@ -26,10 +26,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$definitions = array(
-    'listdata' => array(
+$definitions = [
+    'listdata' => [
         'mode' => cache_store::MODE_APPLICATION,
         'simplekeys' => false,
-        'simpledata' => false
-    )
-);
+        'simpledata' => false,
+    ],
+];

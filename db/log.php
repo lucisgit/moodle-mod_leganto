@@ -26,29 +26,29 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$logs = array(
-    array(
+$logs = [
+    [
         'module' => 'leganto',
         'action' => 'view',
         'mtable' => 'leganto',
-        'field'  => 'name'
-    ),
-    array(
+        'field'  => 'name',
+    ],
+    [
         'module' => 'leganto',
         'action' => 'view all',
         'mtable' => 'leganto',
-        'field'  => 'name'
-    ),
-    array(
+        'field'  => 'name',
+    ],
+    [
         'module' => 'leganto',
         'action' => 'update',
         'mtable' => 'leganto',
-        'field'  => 'name'
-    ),
-    array(
+        'field'  => 'name',
+    ],
+    [
         'module' => 'leganto',
         'action' => 'add',
         'mtable' => 'leganto',
-        'field'  => 'name'
-    )
-);
+        'field'  => 'name',
+    ],
+];

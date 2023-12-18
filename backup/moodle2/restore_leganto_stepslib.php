@@ -41,7 +41,7 @@ class restore_leganto_activity_structure_step extends restore_activity_structure
      * @return array
      */
     protected function define_structure() {
-        $paths = array();
+        $paths = [];
         $paths[] = new restore_path_element('leganto', '/activity/leganto');
 
         // Return the paths wrapped into standard activity structure.

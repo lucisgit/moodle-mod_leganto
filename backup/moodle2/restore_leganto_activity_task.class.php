@@ -60,9 +60,9 @@ class restore_leganto_activity_task extends restore_activity_task {
      * @return array
      */
     public static function define_decode_contents() {
-        $contents = array();
+        $contents = [];
 
-        $contents[] = new restore_decode_content('leganto', array('intro'), 'leganto');
+        $contents[] = new restore_decode_content('leganto', ['intro'], 'leganto');
 
         return $contents;
     }
@@ -73,7 +73,7 @@ class restore_leganto_activity_task extends restore_activity_task {
      * @return array
      */
     public static function define_decode_rules() {
-        $rules = array();
+        $rules = [];
 
         $rules[] = new restore_decode_rule('LEGANTOVIEWBYID', '/mod/leganto/view.php?id=$1', 'course_module');
         $rules[] = new restore_decode_rule('LEGANTOINDEX', '/mod/leganto/index.php?id=$1', 'course');
@@ -88,7 +88,7 @@ class restore_leganto_activity_task extends restore_activity_task {
      * @return array
      */
     public static function define_restore_log_rules() {
-        $rules = array();
+        $rules = [];
 
         $rules[] = new restore_log_rule('leganto', 'add', 'view.php?id={course_module}', '{leganto}');
         $rules[] = new restore_log_rule('leganto', 'edit', 'edit.php?id={course_module}', '{leganto}');
@@ -107,7 +107,7 @@ class restore_leganto_activity_task extends restore_activity_task {
      * @return array
      */
     public static function define_restore_log_rules_for_course() {
-        $rules = array();
+        $rules = [];
 
         $rules[] = new restore_log_rule('leganto', 'view all', 'index.php?id={course}', null);
 

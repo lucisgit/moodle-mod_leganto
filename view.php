@@ -46,14 +46,14 @@ $a  = optional_param('a', 0, PARAM_INT);   // Leganto instance id.
 
 // Two ways to specify the module.
 if ($a) {
-    $leganto = $DB->get_record('leganto', array('id' => $a), '*', MUST_EXIST);
+    $leganto = $DB->get_record('leganto', ['id' => $a], '*', MUST_EXIST);
     $cm = get_coursemodule_from_instance('leganto', $leganto->id, $leganto->course, true, MUST_EXIST);
 } else {
     $cm = get_coursemodule_from_id('leganto', $id, 0, true, MUST_EXIST);
-    $leganto = $DB->get_record('leganto', array('id' => $cm->instance), '*', MUST_EXIST);
+    $leganto = $DB->get_record('leganto', ['id' => $cm->instance], '*', MUST_EXIST);
 }
 
-$course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
+$course = $DB->get_record('course', ['id' => $cm->course], '*', MUST_EXIST);
 
 require_course_login($course, true, $cm);
 $context = context_module::instance($cm->id);
@@ -64,10 +64,10 @@ if ($leganto->display != LEGANTO_DISPLAY_PAGE && !$ajaxrequest) {
     redirect(course_get_url($leganto->course)->out() . '#module-' . $cm->id);
 }
 
-$params = array(
+$params = [
     'context' => $context,
-    'objectid' => $leganto->id
-);
+    'objectid' => $leganto->id,
+];
 $event = \mod_leganto\event\course_module_viewed::create($params);
 $event->add_record_snapshot('course_modules', $cm);
 $event->add_record_snapshot('course', $course);
@@ -87,7 +87,7 @@ if ($ajaxrequest) {
     die();
 }
 
-$PAGE->set_url('/mod/leganto/view.php', array('id' => $cm->id));
+$PAGE->set_url('/mod/leganto/view.php', ['id' => $cm->id]);
 
 $PAGE->set_title($course->shortname . ': ' . $leganto->name);
 $PAGE->set_heading($course->fullname);

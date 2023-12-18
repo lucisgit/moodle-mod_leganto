@@ -45,14 +45,14 @@ class backup_leganto_activity_structure_step extends backup_activity_structure_s
         $userinfo = $this->get_setting_value('userinfo');
 
         // Define each element separated.
-        $leganto = new backup_nested_element('leganto', array('id'), array('name', 'intro', 'introformat', 'timemodified',
-                'display', 'citations', 'displaynotes'));
+        $leganto = new backup_nested_element('leganto', ['id'], ['name', 'intro', 'introformat', 'timemodified',
+                'display', 'citations', 'displaynotes']);
 
         // Build the tree.
         // (nice mono-tree, lol).
 
         // Define sources.
-        $leganto->set_source_table('leganto', array('id' => backup::VAR_ACTIVITYID));
+        $leganto->set_source_table('leganto', ['id' => backup::VAR_ACTIVITYID]);
 
         // Define id annotations.
         // (none).

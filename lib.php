@@ -69,7 +69,7 @@ function leganto_supports($feature) {
  * @return array
  */
 function leganto_get_extra_capabilities() {
-    return array('moodle/site:accessallgroups');
+    return ['moodle/site:accessallgroups'];
 }
 
 /**
@@ -79,7 +79,7 @@ function leganto_get_extra_capabilities() {
  * @return array Status array.
  */
 function leganto_reset_userdata($data) {
-    return array();
+    return [];
 }
 
 /**
@@ -88,7 +88,7 @@ function leganto_reset_userdata($data) {
  * @return array
  */
 function leganto_get_view_actions() {
-    return array('view', 'view all');
+    return ['view', 'view all'];
 }
 
 /**
@@ -97,7 +97,7 @@ function leganto_get_view_actions() {
  * @return array
  */
 function leganto_get_post_actions() {
-    return array('update', 'add');
+    return ['update', 'add'];
 }
 
 /**
@@ -117,7 +117,7 @@ function leganto_add_instance($data, $mform) {
     $data->citations = $leganto->get_citations($data);
     $data->id = $DB->insert_record('leganto', $data);
 
-    $DB->set_field('course_modules', 'instance', $data->id, array('id' => $cmid));
+    $DB->set_field('course_modules', 'instance', $data->id, ['id' => $cmid]);
 
     return $data->id;
 }
@@ -153,12 +153,12 @@ function leganto_update_instance($data, $mform) {
 function leganto_delete_instance($id) {
     global $DB;
 
-    if (!$leganto = $DB->get_record('leganto', array('id' => $id))) {
+    if (!$leganto = $DB->get_record('leganto', ['id' => $id])) {
         return false;
     }
 
     // Note: all context files are deleted automatically.
-    $DB->delete_records('leganto', array('id' => $leganto->id));
+    $DB->delete_records('leganto', ['id' => $leganto->id]);
 
     return true;
 }
@@ -172,7 +172,7 @@ function leganto_delete_instance($id) {
  * @return array Page types.
  */
 function leganto_page_type_list($pagetype, $parentcontext, $currentcontext) {
-    $modulepagetype = array('mod-leganto-*' => get_string('page-mod-leganto-x', 'leganto'));
+    $modulepagetype = ['mod-leganto-*' => get_string('page-mod-leganto-x', 'leganto')];
 
     return $modulepagetype;
 }
@@ -191,7 +191,7 @@ function leganto_page_type_list($pagetype, $parentcontext, $currentcontext) {
 function leganto_get_coursemodule_info($cm) {
     global $DB;
 
-    if (!($leganto = $DB->get_record('leganto', array('id' => $cm->instance),
+    if (!($leganto = $DB->get_record('leganto', ['id' => $cm->instance],
             'id, name, intro, introformat, display, citations'))) {
         return null;
     }
@@ -233,9 +233,9 @@ function leganto_cm_info_dynamic(cm_info $cm) {
         $cm->set_on_click('return false;');
 
         // Display a visual cue to users that clicking the link toggles visibility.
-        $showhidearrow = html_writer::div('', 'showhidearrow', array('id' => 'showhide-' . $cm->id,
-                'title' => get_string('showhide', 'leganto')));
-        $showhidelink = html_writer::link($cm->url, $showhidearrow, array('onclick' => 'return false;'));
+        $showhidearrow = html_writer::div('', 'showhidearrow',
+                ['id' => 'showhide-' . $cm->id, 'title' => get_string('showhide', 'leganto')]);
+        $showhidelink = html_writer::link($cm->url, $showhidearrow, ['onclick' => 'return false;']);
         $cm->set_after_link($showhidelink);
     }
 }
