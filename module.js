@@ -62,16 +62,27 @@ M.mod_leganto.initList = function(Y, cmid, url, expanded, desc) {
             Y.one(arrowid).addClass('collapsed');
         }
 
-        // Move list node out of 'activity-altcontent' div and remove if no description.
-        var listNode = document.getElementById('leganto-' + cmid),
-            altNode = listNode.parentNode.parentNode;
-        altNode.parentNode.parentNode.appendChild(listNode);
+        var activityNode = document.getElementById('module-' + cmid),
+            itemNode = activityNode.querySelector('.activity-item'),
+            titleNode = activityNode.querySelector('.activitytitle'),
+            afterlinkNode = activityNode.querySelector('.activity-afterlink'),
+            altcontentNode = activityNode.querySelector('.activity-altcontent'),
+            listNode = document.getElementById('leganto-' + cmid);
+
+        // Move show/hide toggle node into the 'activity title' div if it's in the wrong place.
+        if (afterlinkNode) {
+            titleNode.append(afterlinkNode);
+        }
+
+        // Move list node out of the 'alt content' div, then remove it if there's no description.
+        itemNode.append(listNode);
         if (desc === false) {
-            altNode.remove();
+            altcontentNode.remove();
         }
 
         Y.delegate('click', function(e) {
             if (e.currentTarget.getAttribute('href') === url) {
+                e.preventDefault();
                 var list = Y.one(listid),
                     arrow = Y.one(arrowid);
 
