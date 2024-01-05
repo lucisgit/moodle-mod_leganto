@@ -212,9 +212,13 @@ div.legantobox ul.citations li.citation a.citationsource:active {
 }
 
 .section .activity.leganto .afterlink {
-    margin: 0 !important;
+    margin: 0;
     padding: 0.25rem;
     border: none;
+}
+
+.section .activity.leganto .afterlink.ml-3 a {
+    margin-left: -1rem;
 }
 
 .section .activity.leganto .contentafterlink {
