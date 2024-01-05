@@ -24,8 +24,8 @@
 
 M.mod_leganto = {};
 
-M.mod_leganto.initList = function(Y, cmid, url, expanded, desc) {
-    Y.use('node', 'transition', function(Y) {
+M.mod_leganto.initList = function (Y, cmid, url, expanded, desc) {
+    Y.use('node', 'transition', function (Y) {
         /**
          * Set relative position style for a list node.
          *
@@ -80,7 +80,7 @@ M.mod_leganto.initList = function(Y, cmid, url, expanded, desc) {
             altcontentNode.remove();
         }
 
-        Y.delegate('click', function(e) {
+        Y.delegate('click', function (e) {
             if (e.currentTarget.getAttribute('href') === url) {
                 e.preventDefault();
                 var list = Y.one(listid),
@@ -99,12 +99,12 @@ M.mod_leganto.initList = function(Y, cmid, url, expanded, desc) {
                     var httpRequest = new XMLHttpRequest();
 
                     // Parse the response and check for errors.
-                    httpRequest.onreadystatechange = function() {
+                    httpRequest.onreadystatechange = function () {
                         if (httpRequest.readyState === 4) {
                             var data = Y.JSON.parse(httpRequest.responseText);
                             if (data.hasOwnProperty('error')) {
                                 // Alert user if an error has occurred.
-                                require(['core/notification'], function(notification) {
+                                require(['core/notification'], function (notification) {
                                     notification.alert('', data.error);
                                 });
                                 window.location.href = url;

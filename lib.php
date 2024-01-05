@@ -36,7 +36,7 @@ define('LEGANTO_DISPLAY_INLINE_EXPANDED', 2);
  * @return mixed True if module supports feature, false if not, null if doesn't know.
  */
 function leganto_supports($feature) {
-    switch($feature) {
+    switch ($feature) {
         case FEATURE_MOD_ARCHETYPE:
             return MOD_ARCHETYPE_RESOURCE;
         case FEATURE_MOD_PURPOSE:
@@ -191,8 +191,7 @@ function leganto_page_type_list($pagetype, $parentcontext, $currentcontext) {
 function leganto_get_coursemodule_info($cm) {
     global $DB;
 
-    if (!($leganto = $DB->get_record('leganto', ['id' => $cm->instance],
-            'id, name, intro, introformat, display, citations'))) {
+    if (!($leganto = $DB->get_record('leganto', ['id' => $cm->instance], 'id, name, intro, introformat, display, citations'))) {
         return null;
     }
     $cminfo = new cached_cm_info();
@@ -228,14 +227,17 @@ function leganto_get_coursemodule_info($cm) {
  * @param cm_info $cm
  */
 function leganto_cm_info_dynamic(cm_info $cm) {
-    if ($cm->customdata) {
+    if ($cm->get_custom_data()) {
         // The field 'customdata' is not empty IF AND ONLY IF we display contents inline.
         $cm->set_on_click('return false;');
 
         // Display a visual cue to users that clicking the link toggles visibility.
-        $showhidearrow = html_writer::div('', 'showhidearrow',
-                ['id' => 'showhide-' . $cm->id, 'title' => get_string('showhide', 'leganto')]);
-        $showhidelink = html_writer::link($cm->url, $showhidearrow, ['onclick' => 'return false;']);
+        $showhidearrow = html_writer::div('', 'showhidearrow', ['id' => 'showhide-' . $cm->id]);
+        $linkattributes = [
+            'onclick' => 'return false;',
+            'title'   => get_string('showhide', 'leganto'),
+        ];
+        $showhidelink = html_writer::link($cm->url, $showhidearrow, $linkattributes);
         $cm->set_after_link($showhidelink);
     }
 }

@@ -825,9 +825,8 @@ class leganto {
                 $buttonaction = new popup_action('click', $buttonhref, 'popup', ['width' => 1024, 'height' => 768]);
                 // The URL in the popup_action object is encoded, but needs to be un-encoded!
                 $buttonaction->jsfunctionargs['url'] = $buttonhref;
-                $buttontitle = $title;
-                $citation->source = $OUTPUT->action_link($buttonhref, $buttonlabel, $buttonaction,
-                        ['class' => 'citationsource', 'title' => $buttontitle]);
+                $buttonattributes = ['class' => 'citationsource', 'title' => $title];
+                $citation->source = $OUTPUT->action_link($buttonhref, $buttonlabel, $buttonaction, $buttonattributes);
             }
 
             if (!empty($parentpath)) {

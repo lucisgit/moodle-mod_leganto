@@ -14,16 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Leganto module renderer.
- *
- * @package    mod_leganto
- * @copyright  2017 Lancaster University {@link http://www.lancaster.ac.uk/}
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @author     Tony Butler <a.butler4@lancaster.ac.uk>
- */
+namespace mod_leganto\output;
 
-defined('MOODLE_INTERNAL') || die();
+use context_module;
+use leganto;
+use plugin_renderer_base;
+use stdClass;
 
 /**
  * Leganto module renderer class.
@@ -33,7 +29,7 @@ defined('MOODLE_INTERNAL') || die();
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @author     Tony Butler <a.butler4@lancaster.ac.uk>
  */
-class mod_leganto_renderer extends plugin_renderer_base {
+class renderer extends plugin_renderer_base {
 
     /**
      * Return the HTML to display the content of the customised reading list.
@@ -88,37 +84,5 @@ class mod_leganto_renderer extends plugin_renderer_base {
         $output = $leganto->get_list_html($list->leganto->citations, $list->leganto->display);
 
         return $output;
-    }
-}
-
-/**
- * Leganto list renderable class.
- *
- * @package    mod_leganto
- * @copyright  2017 Lancaster University {@link http://www.lancaster.ac.uk/}
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @author     Tony Butler <a.butler4@lancaster.ac.uk>
- */
-class leganto_list implements renderable {
-
-    /** @var context The context of the course module for this leganto_list instance. */
-    public $context;
-
-    /** @var stdClass The leganto database record for this leganto_list instance. */
-    public $leganto;
-
-    /** @var cm_info The course module info object for this leganto_list instance. */
-    public $cm;
-
-    /**
-     * Constructor for the leganto_list class.
-     *
-     * @param stdClass $leganto The leganto record.
-     * @param cm_info $cm The course module info.
-     */
-    public function __construct($leganto, $cm) {
-        $this->leganto = $leganto;
-        $this->cm = $cm;
-        $this->context = context_module::instance($cm->id);
     }
 }
