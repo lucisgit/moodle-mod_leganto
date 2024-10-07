@@ -33,6 +33,11 @@ visibility).
 Changelog
 ---------
 
+2024-10-07  v4.5.0
+
+  * Fix inline display of show/hide arrow for Moodle 4.5
+  * Address new issues identified by code checker
+
 2024-01-05  v4.1.0
 
   * Fix inline list display inconsistencies in Moodle 4.1+
@@ -76,14 +81,14 @@ Installing from the Git repository (recommended if you installed Moodle from
 Git):
 
 Follow the instructions at
-https://docs.moodle.org/401/en/Git_for_Administrators#Installing_a_contributed_extension_from_its_Git_repository,
-e.g. for the Moodle 4.1.x code:
+https://docs.moodle.org/405/en/Git_for_Administrators#Installing_a_contributed_extension_from_its_Git_repository,
+e.g. for the Moodle 4.5.x code:
 
     $ cd /path/to/your/moodle/
     $ cd mod/
     $ git clone https://github.com/tonyjbutler/moodle-mod_leganto.git leganto
     $ cd leganto/
-    $ git checkout -b MOODLE_401_STABLE origin/MOODLE_401_STABLE
+    $ git checkout -b MOODLE_405_STABLE origin/MOODLE_405_STABLE
     $ git branch -d master
     $ cd /path/to/your/moodle/
     $ echo /mod/leganto/ >> .git/info/exclude
@@ -104,7 +109,7 @@ Updating Moodle
 ---------------
 If you installed Moodle and the Leganto reading list module from Git you can
 run the following commands to update both (see
-https://docs.moodle.org/401/en/Git_for_Administrators#Installing_a_contributed_extension_from_its_Git_repository):
+https://docs.moodle.org/405/en/Git_for_Administrators#Installing_a_contributed_extension_from_its_Git_repository):
 
     $ cd /path/to/your/moodle/
     $ git pull
