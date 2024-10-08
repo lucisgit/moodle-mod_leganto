@@ -52,6 +52,8 @@ if ($ADMIN->fulltree) {
             get_string('apiurl_desc', 'leganto'), get_string('apiurl_default', 'leganto'), PARAM_URL));
     $settings->add(new admin_setting_configtext('leganto/apikey', get_string('apikey', 'leganto'),
             get_string('apikey_desc', 'leganto'), '', PARAM_TEXT));
+    $settings->add(new admin_setting_configcheckbox('leganto/usenewui', get_string('usenewui', 'leganto'),
+            get_string('usenewui_desc', 'leganto'), 0));
 
     // Code settings.
     $settings->add(new admin_setting_heading('leganto/codesettings', get_string('codesettings', 'leganto'), ''));

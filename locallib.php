@@ -775,6 +775,9 @@ class leganto {
             $citation->title = $OUTPUT->heading($title, $headinglevel, 'citationtitle h' . ($headinglevel + 1));
             if (!empty($citation->leganto_permalink)) {
                 $permalink = str_replace('auth=local', 'auth=SAML', $citation->leganto_permalink);
+                if (!empty($this->adminconfig->usenewui)) {
+                    $permalink = str_replace('readinglist', 'nui', $permalink);
+                }
                 $linkaction = new popup_action('click', $permalink, 'popup', ['width' => 1024, 'height' => 768]);
                 $linktitle = get_string('viewcitation', 'leganto');
                 $linkclass = !is_null($display) && $display == LEGANTO_DISPLAY_PAGE ? ' fa-lg' : '';
