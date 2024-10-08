@@ -46,6 +46,10 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configcheckbox('leganto/authorsinconfig', get_string('authorsinconfig', 'leganto'),
             get_string('authorsinconfig_desc', 'leganto'), 0));
 
+    // New UI transitioning.
+    $settings->add(new admin_setting_configcheckbox('leganto/usenewui', get_string('usenewui', 'leganto'),
+        get_string('usenewui_desc', 'leganto'), 0));
+
     // API settings.
     $settings->add(new admin_setting_heading('leganto/apisettings', get_string('apisettings', 'leganto'), ''));
     $settings->add(new admin_setting_configtext('leganto/apiurl', get_string('apiurl', 'leganto'),

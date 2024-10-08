@@ -33,6 +33,10 @@ visibility).
 Changelog
 ---------
 
+2024-10-08  v4.5.1
+
+  * Add option to use new Leganto UI for citation links
+
 2024-10-07  v4.5.0
 
   * Fix inline display of show/hide arrow for Moodle 4.5

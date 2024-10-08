@@ -92,6 +92,8 @@ $string['sectionheading'] = '{$a->name} {$a->count}';
 $string['selectcitations'] = 'Select citations from "{$a}"';
 $string['settingnotconfigured'] = 'Error: Leganto module admin setting "{$a}" empty or misconfigured.';
 $string['showhide'] = 'Show/hide reading list';
+$string['usenewui'] = 'Use new UI';
+$string['usenewui_desc'] = 'Enable this option to make citation links point to the new Leganto user interface. This is intended to provide an interim solution while your library is transitioning to the new UI (see <a href="https://knowledge.exlibrisgroup.com/Leganto/Product_Materials/New_User_Experience/FAQ#How_will_we_see_the_new_UI.3F" target="_blank">https://knowledge.exlibrisgroup.com/Leganto/Product_Materials/New_User_Experience/FAQ#How_will_we_see_the_new_UI.3F</a> for details).';
 $string['viewcitation'] = 'View citation record in Leganto';
 $string['viewonline'] = 'View online';
 $string['yearregex'] = 'Year code regex';
