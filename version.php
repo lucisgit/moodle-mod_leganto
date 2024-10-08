@@ -30,4 +30,4 @@ $plugin->requires  = 2023100900;        // Requires this Moodle version.
 $plugin->component = 'mod_leganto';     // Full name of the plugin (used for diagnostics).
 $plugin->cron      = 0;
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = 'v4.5.0 (Build: 20241007)';
+$plugin->release   = 'v4.5.1 (Build: 20241008)';
