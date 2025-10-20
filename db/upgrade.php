@@ -38,7 +38,6 @@ function xmldb_leganto_upgrade($oldversion) {
     // Put any upgrade step following this.
 
     if ($oldversion < 2018013000) {
-
         // Add a 'displaynotes' field to the 'leganto' table.
         $table = new xmldb_table('leganto');
         $field = new xmldb_field('displaynotes', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, 0, 'citations');

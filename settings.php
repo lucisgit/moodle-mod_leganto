@@ -23,39 +23,81 @@
  * @author     Tony Butler <a.butler4@lancaster.ac.uk>
  */
 
+use mod_leganto\admin_setting\codecolumn;
+use mod_leganto\admin_setting\codesource;
+use mod_leganto\admin_setting\codetable;
+use mod_leganto\admin_setting\courseattribute;
+use mod_leganto\admin_setting\coursecolumn;
+
 defined('MOODLE_INTERNAL') || die;
 
-require_once($CFG->dirroot . '/mod/leganto/adminlib.php');
-
 if ($ADMIN->fulltree) {
-
     // General settings.
     $settings->add(new admin_setting_heading('leganto/generalsettings', get_string('generalsettings', 'leganto'), ''));
-    $settings->add(new admin_setting_configcheckbox('leganto/requiremodintro', get_string('requiremodintro', 'leganto'),
-            get_string('requiremodintro_desc', 'leganto'), 0));
+    $settings->add(
+        new admin_setting_configcheckbox(
+            'leganto/requiremodintro',
+            get_string('requiremodintro', 'leganto'),
+            get_string('requiremodintro_desc', 'leganto'),
+            0
+        )
+    );
 
     // Display settings.
     $optionsdd = [];
     $optionsdd[0] = get_string('displaypage', 'leganto');
     $optionsdd[1] = get_string('displayinlinecollapsed', 'leganto');
     $optionsdd[2] = get_string('displayinlineexpanded', 'leganto');
-    $settings->add(new admin_setting_configselect('leganto/defaultdisplay', get_string('defaultdisplay', 'leganto'),
-            get_string('defaultdisplay_desc', 'leganto'), 0, $optionsdd));
+    $settings->add(
+        new admin_setting_configselect(
+            'leganto/defaultdisplay',
+            get_string('defaultdisplay', 'leganto'),
+            get_string('defaultdisplay_desc', 'leganto'),
+            0,
+            $optionsdd
+        )
+    );
 
     // Authors in module config form.
-    $settings->add(new admin_setting_configcheckbox('leganto/authorsinconfig', get_string('authorsinconfig', 'leganto'),
-            get_string('authorsinconfig_desc', 'leganto'), 0));
+    $settings->add(
+        new admin_setting_configcheckbox(
+            'leganto/authorsinconfig',
+            get_string('authorsinconfig', 'leganto'),
+            get_string('authorsinconfig_desc', 'leganto'),
+            0
+        )
+    );
 
     // New UI transitioning.
-    $settings->add(new admin_setting_configcheckbox('leganto/usenewui', get_string('usenewui', 'leganto'),
-        get_string('usenewui_desc', 'leganto'), 0));
+    $settings->add(
+        new admin_setting_configcheckbox(
+            'leganto/usenewui',
+            get_string('usenewui', 'leganto'),
+            get_string('usenewui_desc', 'leganto'),
+            0
+        )
+    );
 
     // API settings.
     $settings->add(new admin_setting_heading('leganto/apisettings', get_string('apisettings', 'leganto'), ''));
-    $settings->add(new admin_setting_configtext('leganto/apiurl', get_string('apiurl', 'leganto'),
-            get_string('apiurl_desc', 'leganto'), get_string('apiurl_default', 'leganto'), PARAM_URL));
-    $settings->add(new admin_setting_configtext('leganto/apikey', get_string('apikey', 'leganto'),
-            get_string('apikey_desc', 'leganto'), '', PARAM_TEXT));
+    $settings->add(
+        new admin_setting_configtext(
+            'leganto/apiurl',
+            get_string('apiurl', 'leganto'),
+            get_string('apiurl_desc', 'leganto'),
+            get_string('apiurl_default', 'leganto'),
+            PARAM_URL
+        )
+    );
+    $settings->add(
+        new admin_setting_configtext(
+            'leganto/apikey',
+            get_string('apikey', 'leganto'),
+            get_string('apikey_desc', 'leganto'),
+            '',
+            PARAM_TEXT
+        )
+    );
 
     // Code settings.
     $settings->add(new admin_setting_heading('leganto/codesettings', get_string('codesettings', 'leganto'), ''));
@@ -65,27 +107,81 @@ if ($ADMIN->fulltree) {
     $optionscs['idnumber'] = get_string('idnumbercourse');
     $optionscs['shortname'] = get_string('shortnamecourse');
     $optionscs['codetable'] = get_string('codetable', 'leganto');
-    $settings->add(new leganto_codesource_setting('leganto/codesource', get_string('codesource', 'leganto'),
-            get_string('codesource_desc', 'leganto'), 'idnumber', $optionscs));
+    $settings->add(
+        new codesource(
+            'leganto/codesource',
+            get_string('codesource', 'leganto'),
+            get_string('codesource_desc', 'leganto'),
+            'idnumber',
+            $optionscs
+        )
+    );
 
     // Code regexes.
-    $settings->add(new admin_setting_configtext('leganto/coderegex', get_string('coderegex', 'leganto'),
-            get_string('coderegex_desc', 'leganto'), '', PARAM_TEXT));
-    $settings->add(new admin_setting_configtext('leganto/yearregex', get_string('yearregex', 'leganto'),
-            get_string('yearregex_desc', 'leganto'), '', PARAM_TEXT));
+    $settings->add(
+        new admin_setting_configtext(
+            'leganto/coderegex',
+            get_string('coderegex', 'leganto'),
+            get_string('coderegex_desc', 'leganto'),
+            '',
+            PARAM_TEXT
+        )
+    );
+    $settings->add(
+        new admin_setting_configtext(
+            'leganto/yearregex',
+            get_string('yearregex', 'leganto'),
+            get_string('yearregex_desc', 'leganto'),
+            '',
+            PARAM_TEXT
+        )
+    );
 
     // Code table details.
-    $settings->add(new leganto_codetable_setting('leganto/codetable', get_string('codetable', 'leganto'),
-            get_string('codetable_desc', 'leganto'), $CFG->prefix, PARAM_TEXT));
-    $settings->add(new leganto_codecolumn_setting('leganto/codecolumn', get_string('codecolumn', 'leganto'),
-            get_string('codecolumn_desc', 'leganto'), '', PARAM_TEXT));
-    $settings->add(new leganto_coursecolumn_setting('leganto/coursecolumn', get_string('coursecolumn', 'leganto'),
-            get_string('coursecolumn_desc', 'leganto'), '', PARAM_TEXT));
-    $settings->add(new leganto_courseattribute_setting('leganto/courseattribute',
-            get_string('courseattribute', 'leganto'), get_string('courseattribute_desc', 'leganto'), '', PARAM_TEXT));
+    $settings->add(
+        new codetable(
+            'leganto/codetable',
+            get_string('codetable', 'leganto'),
+            get_string('codetable_desc', 'leganto'),
+            $CFG->prefix,
+            PARAM_TEXT
+        )
+    );
+    $settings->add(
+        new codecolumn(
+            'leganto/codecolumn',
+            get_string('codecolumn', 'leganto'),
+            get_string('codecolumn_desc', 'leganto'),
+            '',
+            PARAM_TEXT
+        )
+    );
+    $settings->add(
+        new coursecolumn(
+            'leganto/coursecolumn',
+            get_string('coursecolumn', 'leganto'),
+            get_string('coursecolumn_desc', 'leganto'),
+            '',
+            PARAM_TEXT
+        )
+    );
+    $settings->add(
+        new courseattribute(
+            'leganto/courseattribute',
+            get_string('courseattribute', 'leganto'),
+            get_string('courseattribute_desc', 'leganto'),
+            '',
+            PARAM_TEXT
+        )
+    );
 
     // Meta child codes.
-    $settings->add(new admin_setting_configcheckbox('leganto/includechildcodes', get_string('includechildcodes', 'leganto'),
-            get_string('includechildcodes_desc', 'leganto'), 0));
-
+    $settings->add(
+        new admin_setting_configcheckbox(
+            'leganto/includechildcodes',
+            get_string('includechildcodes', 'leganto'),
+            get_string('includechildcodes_desc', 'leganto'),
+            0
+        )
+    );
 }

@@ -29,7 +29,7 @@ $id = required_param('id', PARAM_INT); // Course id.
 
 $course = $DB->get_record('course', ['id' => $id], '*', MUST_EXIST);
 
-require_course_login($course, true);
+require_course_login($course);
 $PAGE->set_pagelayout('incourse');
 
 $params = [
@@ -46,7 +46,7 @@ $strintro        = get_string('moduleintro');
 $strlastmodified = get_string('lastmodified');
 
 $PAGE->set_url('/mod/leganto/index.php', ['id' => $course->id]);
-$PAGE->set_title($course->shortname.': '.$strlegantos);
+$PAGE->set_title($course->shortname . ': ' . $strlegantos);
 $PAGE->set_heading($course->fullname);
 $PAGE->navbar->add($strlegantos);
 echo $OUTPUT->header();
@@ -62,7 +62,7 @@ $table = new html_table();
 $table->attributes['class'] = 'generaltable mod_index';
 
 if ($usesections) {
-    $strsectionname = get_string('sectionname', 'format_'.$course->format);
+    $strsectionname = get_string('sectionname', 'format_' . $course->format);
     $table->head  = [$strsectionname, $strname, $strintro];
     $table->align = ['center', 'left', 'left'];
 } else {
@@ -86,13 +86,13 @@ foreach ($legantos as $leganto) {
             $currentsection = $leganto->section;
         }
     } else {
-        $printsection = '<span class="smallinfo">'.userdate($leganto->timemodified)."</span>";
+        $printsection = '<span class="smallinfo">' . userdate($leganto->timemodified) . "</span>";
     }
 
     $class = $leganto->visible ? '' : 'class="dimmed"'; // Hidden modules are dimmed.
     $table->data[] = [
         $printsection,
-        "<a $class href=\"view.php?id=$cm->id\">".format_string($leganto->name)."</a>",
+        "<a $class href=\"view.php?id=$cm->id\">" . format_string($leganto->name) . "</a>",
         format_module_intro('leganto', $leganto, $cm->id),
     ];
 }

@@ -41,7 +41,6 @@ require_once($CFG->dirroot . '/mod/leganto/lib.php');
  * @author     Tony Butler <a.butler4@lancaster.ac.uk>
  */
 class leganto {
-
     /** @var stdClass The leganto record that contains the global settings for this leganto instance. */
     private $instance;
 
@@ -483,7 +482,7 @@ class leganto {
         }
 
         // Prepare cURL request data.
-        $curl = new curl;
+        $curl = new curl();
         $header = [
             'Accept: application/json',
             'Authorization: apikey ' . $adminconfig->apikey,
@@ -781,8 +780,12 @@ class leganto {
                 $linkaction = new popup_action('click', $permalink, 'popup', ['width' => 1024, 'height' => 768]);
                 $linktitle = get_string('viewcitation', 'leganto');
                 $linkclass = !is_null($display) && $display == LEGANTO_DISPLAY_PAGE ? ' fa-lg' : '';
-                $citation->permalink = $OUTPUT->action_link($permalink, ' ', $linkaction,
-                        ['class' => 'fa fa-external-link citationlink' . $linkclass, 'title' => $linktitle]);
+                $citation->permalink = $OUTPUT->action_link(
+                    $permalink,
+                    ' ',
+                    $linkaction,
+                    ['class' => 'fa fa-external-link citationlink' . $linkclass, 'title' => $linktitle]
+                );
             }
 
             if (empty($citation->author) && !empty($citation->metadata->author)) {

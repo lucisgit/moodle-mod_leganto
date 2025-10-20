@@ -31,7 +31,6 @@ use stdClass;
  * @author     Tony Butler <a.butler4@lancaster.ac.uk>
  */
 class leganto_list implements renderable {
-
     /** @var context The context of the course module for this leganto_list instance. */
     public $context;
 

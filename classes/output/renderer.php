@@ -30,7 +30,6 @@ use stdClass;
  * @author     Tony Butler <a.butler4@lancaster.ac.uk>
  */
 class renderer extends plugin_renderer_base {
-
     /**
      * Return the HTML to display the content of the customised reading list.
      *
@@ -40,9 +39,10 @@ class renderer extends plugin_renderer_base {
     public function display_leganto(stdClass $leganto) {
         $output = '';
         $legantoinstances = get_fast_modinfo($leganto->course)->get_instances_of('leganto');
-        if (!isset($legantoinstances[$leganto->id]) ||
-                !($cm = $legantoinstances[$leganto->id]) ||
-                !($context = context_module::instance($cm->id))) {
+        if (
+            !isset($legantoinstances[$leganto->id]) || !($cm = $legantoinstances[$leganto->id]) ||
+                !($context = context_module::instance($cm->id))
+        ) {
             // Some error in parameters.
             // Don't throw any errors in renderer, just return empty string.
             // Capability to view module must be checked before calling renderer.

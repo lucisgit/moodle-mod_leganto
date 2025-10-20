@@ -38,7 +38,6 @@ require_once($CFG->dirroot . '/mod/leganto/backup/moodle2/restore_leganto_stepsl
  * @author     Tony Butler <a.butler4@lancaster.ac.uk>
  */
 class restore_leganto_activity_task extends restore_activity_task {
-
     /**
      * Define (add) particular settings this activity can have.
      */

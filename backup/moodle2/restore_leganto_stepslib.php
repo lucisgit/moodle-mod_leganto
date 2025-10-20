@@ -34,7 +34,6 @@
  * @author     Tony Butler <a.butler4@lancaster.ac.uk>
  */
 class restore_leganto_activity_structure_step extends restore_activity_structure_step {
-
     /**
      * Prepare the activity data.
      *

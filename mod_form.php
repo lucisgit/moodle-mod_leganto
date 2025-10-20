@@ -37,7 +37,6 @@ require_once($CFG->dirroot . '/mod/leganto/locallib.php');
  * @author     Tony Butler <a.butler4@lancaster.ac.uk>
  */
 class mod_leganto_mod_form extends moodleform_mod {
-
     /** @var leganto The standard base class for mod_leganto. */
     private $leganto;
 
@@ -57,9 +56,6 @@ class mod_leganto_mod_form extends moodleform_mod {
         }
         $this->leganto = new leganto($ctx, null, null);
         if ($this->current && $this->current->course) {
-            if (!$ctx) {
-                $ctx = context_course::instance($this->current->course);
-            }
             $course = $DB->get_record('course', ['id' => $this->current->course], '*', MUST_EXIST);
             $this->leganto->set_course($course);
         }
@@ -91,9 +87,13 @@ class mod_leganto_mod_form extends moodleform_mod {
         $adminconfig = $this->leganto->get_admin_config();
 
         $mform->addElement('header', 'appearance', get_string('appearance'));
-        $mform->setExpanded('appearance', true);
+        $mform->setExpanded('appearance');
 
-        $mform->addElement('select', 'display', get_string('display', 'leganto'), [
+        $mform->addElement(
+            'select',
+            'display',
+            get_string('display', 'leganto'),
+            [
                 LEGANTO_DISPLAY_PAGE             => get_string('displaypage', 'leganto'),
                 LEGANTO_DISPLAY_INLINE_COLLAPSED => get_string('displayinlinecollapsed', 'leganto'),
                 LEGANTO_DISPLAY_INLINE_EXPANDED  => get_string('displayinlineexpanded', 'leganto'),

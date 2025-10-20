@@ -38,7 +38,6 @@ require_once($CFG->dirroot . '/mod/leganto/backup/moodle2/backup_leganto_stepsli
  * @author     Tony Butler <a.butler4@lancaster.ac.uk>
  */
 class backup_leganto_activity_task extends backup_activity_task {
-
     /**
      * Define (add) particular settings this activity can have.
      */

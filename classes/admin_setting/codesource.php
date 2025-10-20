@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * The mod_leganto course module viewed event.
+ * Leganto module admin library.
  *
  * @package    mod_leganto
  * @copyright  2017 Lancaster University {@link http://www.lancaster.ac.uk/}
@@ -23,24 +23,42 @@
  * @author     Tony Butler <a.butler4@lancaster.ac.uk>
  */
 
-namespace mod_leganto\event;
+namespace mod_leganto\admin_setting;
+
+use admin_setting_configselect;
 
 /**
- * The mod_leganto course module viewed event class.
+ * Admin setting for code source, adds validation.
  *
  * @package    mod_leganto
- * @since      Moodle 2.7
  * @copyright  2017 Lancaster University {@link http://www.lancaster.ac.uk/}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @author     Tony Butler <a.butler4@lancaster.ac.uk>
  */
-class course_module_viewed extends \core\event\course_module_viewed {
+class codesource extends admin_setting_configselect {
     /**
-     * Init method.
+     * Validate data.
+     *
+     * This ensures that all required table details are provided if custom table
+     * is selected as the code source.
+     *
+     * @param string $data The submitted data.
+     * @return mixed True on success, else error message.
      */
-    protected function init() {
-        $this->data['crud'] = 'r';
-        $this->data['edulevel'] = self::LEVEL_PARTICIPATING;
-        $this->data['objecttable'] = 'leganto';
+    public function validate($data) {
+        $result = parent::validate($data);
+        if ($result !== true) {
+            return $result;
+        }
+
+        $codetable = get_config('leganto', 'codetable');
+        $codecolumn = get_config('leganto', 'codecolumn');
+        $coursecolumn = get_config('leganto', 'coursecolumn');
+        $courseattribute = get_config('leganto', 'courseattribute');
+        if ($data === 'codetable' && (empty($codetable) || empty($codecolumn) || empty($coursecolumn) || empty($courseattribute))) {
+            return get_string('errorcodesource', 'leganto');
+        }
+
+        return true;
     }
 }
